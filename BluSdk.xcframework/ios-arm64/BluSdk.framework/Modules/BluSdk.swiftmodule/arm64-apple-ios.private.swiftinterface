@@ -1,0 +1,222 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BluSdk
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+@_exported import BluSdk
+import CommonCrypto
+import ContactsUI
+import CoreLocation
+import Foundation
+import LocalAuthentication
+import MessageUI
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+public enum BluSdkEnv : Swift.Int {
+  case prod
+  case uat
+  case dev
+  case stg
+  case stgDemo
+  case gcp
+  case custom
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum DebugLevel {
+  case verbose
+  case none
+  public static func == (a: DebugLevel, b: DebugLevel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc public enum BluLogType : Swift.Int {
+  case debug = 0
+  case info = 1
+  case warning = 2
+  case error = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class BluSdk {
+  public static var shared: BluSdk
+  public func setDebugLevel(_ debugLevel: DebugLevel)
+  public func configure(from parentVC: UIKit.UIViewController?, env: BluSdkEnv, cotDomain: Swift.String, deviceId: Swift.String, customBaseUrl: Swift.String? = nil, certificateName: Swift.String? = nil)
+  public func removeToken(with bluDelegate: BaseBluViewDelegate? = nil, origin: Swift.String)
+  public func isHavePublicKey(with bluDelegate: BaseBluViewDelegate? = nil) -> Swift.Bool
+  public var isSetDevicePasscode: Swift.Bool {
+    get
+  }
+  @objc deinit
+}
+public let ID_BAHASA: Swift.String
+public let THANK_YOU_URL_DEFAULT: Swift.String
+public let HOMEPAGE_URL_DEFAULT: Swift.String
+extension Swift.Double {
+  public var seconds: Swift.Int64 {
+    get
+  }
+  public var milliseconds: Swift.Int64 {
+    get
+  }
+}
+public enum CameraScreenType : Swift.String {
+  case ktp
+  case selfieKtp
+  case signature
+  case npwp
+  case profile
+  case faceEnrollment
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class BluWebView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var callbackCloseUrls: [Swift.String]
+  @objc deinit
+}
+extension BluWebView {
+  @_Concurrency.MainActor(unsafe) @objc override final public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
+}
+extension BluWebView : WebKit.WKUIDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptAlertPanelWithMessage message: Swift.String, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptConfirmPanelWithMessage message: Swift.String, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: Swift.String, defaultText: Swift.String?, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping (Swift.String?) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, createWebViewWith configuration: WebKit.WKWebViewConfiguration, for navigationAction: WebKit.WKNavigationAction, windowFeatures: WebKit.WKWindowFeatures) -> WebKit.WKWebView?
+}
+extension BluWebView : WebKit.WKNavigationDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationResponse: WebKit.WKNavigationResponse, decisionHandler: @escaping (WebKit.WKNavigationResponsePolicy) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didStartProvisionalNavigation navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WebKit.WKNavigation!)
+}
+extension BluWebView : WebKit.WKScriptMessageHandler {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+}
+public enum Language : Swift.String {
+  case id
+  case en
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public protocol BaseBluViewDelegate {
+  @objc optional func bluWebView(navigationResponseStatusCode: Swift.Int, for url: Foundation.URL?)
+  @objc optional func bluWebViewDidStartNavigation()
+  @objc optional func bluWebViewLoading(progress: Swift.Float)
+  @objc optional func bluWebViewDidFinishNavigation()
+  @objc optional func bluIsNeedReloadPartialView()
+  @objc optional func bluFailedLoadWebView(with error: Swift.Error?)
+  @objc optional func bluLog(type: BluLogType, message: Swift.String?, error: Swift.Error?)
+  @objc optional func bluInvalidConfigKey()
+}
+@objc public protocol BluViewDelegate : BaseBluViewDelegate {
+  @objc func bluCloseWebView(with url: Swift.String)
+  @objc optional func bluGenerateSignatureFailed()
+  @objc optional func bluIsNeedLinkage()
+  @objc func bluLinkageFailed()
+  @objc optional func bluOnPaymentCompleted()
+  @objc optional func bluOnQrisCompleted()
+  @objc func bluIsNeedSetDevicePasscode()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class BluView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: BluViewDelegate?
+  @objc deinit
+}
+extension BluView {
+  @_Concurrency.MainActor(unsafe) public func openBluLinkage(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, challenge: Swift.String, challengeId: Swift.String, email: Swift.String? = "", homepageUrl: Swift.String? = nil, lang: Swift.String? = ID_BAHASA, tncConsents: Swift.String? = nil)
+  @_Concurrency.MainActor(unsafe) public func openBluLinkageConfirmation(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, email: Swift.String? = "", homepageUrl: Swift.String? = nil, lang: Swift.String? = ID_BAHASA, confirmToken: Swift.String, tncConsents: Swift.String? = nil)
+  @_Concurrency.MainActor(unsafe) public func openBluPayment(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, virtualAccountNumber: Swift.String, partnerReferenceNumber: Swift.String, amount: Swift.String, customerAdminFee: Swift.String, billDescription: Swift.String, thankYouPageUrl: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluQris(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, partnerReferenceNumber: Swift.String, qrisCode: Swift.String, homepageUrl: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluAuth(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluTopUp(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluTransfer(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, partnerReferenceNumber: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluBiller(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, partnerReferenceNumber: Swift.String, billerType: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func openBluWebPage(url: Swift.String)
+}
+extension BluView {
+  @_Concurrency.MainActor(unsafe) public var isCanGoBack: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public func historyBack()
+  @_Concurrency.MainActor(unsafe) public var isCanGoForward: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public func historyForward()
+}
+extension BluView {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebView(navigationResponseStatusCode: Swift.Int, for url: Foundation.URL?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewDidStartNavigation()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewLoading(progress: Swift.Float)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewDidFinishNavigation()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluIsNeedReloadPartialView()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluFailedLoadWebView(with error: Swift.Error?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluLog(type: BluLogType, message: Swift.String?, error: Swift.Error?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluInvalidConfigKey()
+}
+extension BluView : MessageUI.MFMailComposeViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func mailComposeController(_ controller: MessageUI.MFMailComposeViewController, didFinishWith result: MessageUI.MFMailComposeResult, error: Swift.Error?)
+}
+extension BluView : CoreLocation.CLLocationManagerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @available(iOS 14.0, *)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func locationManagerDidChangeAuthorization(_ manager: CoreLocation.CLLocationManager)
+}
+extension BluView : ContactsUI.CNContactPickerDelegate {
+  @_Concurrency.MainActor(unsafe) public func contactPickerDidCancel(picker: ContactsUI.CNContactPickerViewController)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func contactPicker(_ picker: ContactsUI.CNContactPickerViewController, didSelect contact: Contacts.CNContact)
+}
+@objc public protocol BluPartialViewDelegate : BaseBluViewDelegate {
+  @objc func bluIsNeedOpenMainWebView()
+  @objc func bluIsNeedOpenAuth()
+  @objc func bluIsNeedOpenTopUp()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class BluPartialView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: BluPartialViewDelegate?
+  @_Concurrency.MainActor(unsafe) public func openBluPartialWebView(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, lang: Swift.String? = ID_BAHASA)
+  @_Concurrency.MainActor(unsafe) public func showBluBalance(companyCode: Swift.String, username: Swift.String, deviceId: Swift.String, lang: Swift.String? = ID_BAHASA, backgroundColor: Swift.String? = nil, fontColor: Swift.String? = nil, fontFamily: Swift.String? = nil, fontSize: Swift.String? = nil, fontStyle: Swift.String? = nil, fontWeight: Swift.String? = nil, textAlign: Swift.String? = nil, textOverflow: Swift.String? = nil, withCurrency: Swift.Bool? = nil, errorMessage: Swift.String? = nil)
+  @objc deinit
+}
+extension BluPartialView {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebView(navigationResponseStatusCode: Swift.Int, for url: Foundation.URL?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewDidStartNavigation()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewLoading(progress: Swift.Float)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluWebViewDidFinishNavigation()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluIsNeedReloadPartialView()
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluFailedLoadWebView(with error: Swift.Error?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluLog(type: BluLogType, message: Swift.String?, error: Swift.Error?)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func bluInvalidConfigKey()
+}
+extension BluSdkEnv : Swift.Equatable {}
+extension BluSdkEnv : Swift.Hashable {}
+extension BluSdkEnv : Swift.RawRepresentable {}
+extension DebugLevel : Swift.Equatable {}
+extension DebugLevel : Swift.Hashable {}
+extension BluLogType : Swift.Equatable {}
+extension BluLogType : Swift.Hashable {}
+extension BluLogType : Swift.RawRepresentable {}
+extension CameraScreenType : Swift.Equatable {}
+extension CameraScreenType : Swift.Hashable {}
+extension CameraScreenType : Swift.RawRepresentable {}
+extension Language : Swift.Equatable {}
+extension Language : Swift.Hashable {}
+extension Language : Swift.RawRepresentable {}
+extension BluView : BaseBluViewDelegate {}
+extension BluPartialView : BaseBluViewDelegate {}

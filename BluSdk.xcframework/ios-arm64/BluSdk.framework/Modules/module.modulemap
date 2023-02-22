@@ -1,0 +1,11 @@
+framework module BluSdk {
+  umbrella header "BluSdk.h"
+
+  export *
+  module * { export * }
+}
+
+module BluSdk.Swift {
+    header "BluSdk-Swift.h"
+    requires objc
+}
